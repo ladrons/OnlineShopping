@@ -1,0 +1,54 @@
+﻿@model AppUserVM
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width" />
+    <link rel="shortcut icon" href="img/favicon.png">
+
+    <title>OnlineShopping | Login</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="~/Tools/OuterTools/css/bootstrap.min.css" rel="stylesheet">
+    <link href="~/Tools/OuterTools/css/bootstrap-reset.css" rel="stylesheet">
+    <!--external css-->
+    <link href="~/Tools/OuterTools/assets/font-awesome/css/font-awesome.css" rel="stylesheet" />
+    <!-- Custom styles for this template -->
+    <link href="~/Tools/OuterTools/css/style.css" rel="stylesheet">
+    <link href="~/Tools/OuterTools/css/style-responsive.css" rel="stylesheet" />
+</head>
+
+<body class="login-body">
+    <div class="container">
+
+        <center>
+            <h3>
+                @TempData["ActiveControl"]
+            </h3>
+        </center>
+
+        @using (Html.BeginForm("Login", "Home", FormMethod.Post, new { @class = "form-signin" }))
+        {
+            <center><h2 class="form-signin-heading">GİRİŞ YAP</h2></center>
+
+            <div class="login-wrap">
+                @Html.TextBoxFor(x => x.AppUser.UserName, new { @class = "form-control", placeholder = "Kullanıcı Adı" })
+                @Html.PasswordFor(x => x.AppUser.Password, new { @class = "form-control", placeholder = "Şifre" })
+            </div>
+
+            <button class="btn-btn-lg btn btn-block btn btn-primary">Giriş Yap</button>
+
+            <hr />
+
+            <p>Üye Değil misin?</p>
+
+            <div class="btn btn-lg btn-block">@Html.ActionLink("Kayıt Ol", "RegisterNow", "Register")</div>
+        }
+    </div>
+</body>
+</html>
