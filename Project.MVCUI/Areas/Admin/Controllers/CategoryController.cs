@@ -70,8 +70,8 @@ namespace Project.MVCUI.Areas.Admin.Controllers
         #region UpdateCategory
         public ActionResult UpdateCategory(int id)
         {
-            CategoryVM cvm = new CategoryVM { Category = _cRep.Find(id) };
-            return View(cvm);
+            CategoryVM ovm = new CategoryVM { Category = _cRep.Find(id) };
+            return View(ovm);
         }
         [HttpPost]
         public ActionResult UpdateCategory(Category category)

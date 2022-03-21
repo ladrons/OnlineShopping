@@ -42,9 +42,9 @@ namespace Project.MVCUI.Areas.Admin.Controllers
             return View(pvm);
         }
         [HttpPost]
-        public ActionResult AddProduct(Product product, HttpPostedFileBase image)
+        public ActionResult AddProduct(Product product, HttpPostedFileBase resim)
         {
-            product.ImagePath = ImageUploader.UploadImage("/Pictures/", image);
+            product.ImagePath = ImageUploader.UploadImage("/Tools/Pictures/", resim);
             _pRep.Add(product);
 
             return RedirectToAction("ProductList");

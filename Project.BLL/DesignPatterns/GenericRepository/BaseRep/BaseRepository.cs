@@ -92,12 +92,13 @@ namespace Project.BLL.DesignPatterns.GenericRepository.BaseRep
 
         public T GetFirstData()
         {
-            return _db.Set<T>().OrderByDescending(X => X.CreatedDate).FirstOrDefault();
+            return _db.Set<T>().OrderBy(x => x.CreatedDate).FirstOrDefault();
+            
         }
 
         public T GetLastData()
         {
-            return _db.Set<T>().OrderBy(X => X.CreatedDate).FirstOrDefault();
+            return _db.Set<T>().OrderByDescending(x => x.CreatedDate).FirstOrDefault();
         }
 
         public List<T> GetModifieds()

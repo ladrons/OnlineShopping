@@ -1,0 +1,48 @@
+﻿@model DashboardVM
+
+<div class="row state-overview">
+    <div class="col-lg-3 col-sm-6">
+        <section class="panel">
+            <div class="symbol terques">
+                <i class="icon-tasks"></i>
+            </div>
+            <div class="value">
+                <h1>@Model.Categories.Count</h1>
+                <p>Categories</p>
+            </div>
+        </section>
+    </div>
+    <div class="col-lg-3 col-sm-6">
+        <section class="panel">
+            <div class="symbol red">
+                <i class="icon-tags"></i>
+            </div>
+            <div class="value">
+                <h1>@Model.Products.Count</h1>
+                <p>Products</p>
+            </div>
+        </section>
+    </div>
+    <div class="col-lg-3 col-sm-6">
+        <section class="panel">
+            <div class="symbol yellow">
+                <i class="icon-shopping-cart"></i>
+            </div>
+            <div class="value">
+                <h1>328</h1>
+                <p>New Order</p>
+            </div>
+        </section>
+    </div>
+    <div class="col-lg-3 col-sm-6">
+        <section class="panel">
+            <div class="symbol blue">
+                <i class="icon-bar-chart"></i>
+            </div>
+            <div class="value">
+                <h1>10328</h1>
+                <p>Total Profit</p>
+            </div>
+        </section>
+    </div>
+</div>

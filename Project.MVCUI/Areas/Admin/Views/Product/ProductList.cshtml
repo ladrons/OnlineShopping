@@ -32,15 +32,8 @@
                             <td>@item.ProductName</td>
                             <td class="hidden-phone">@item.UnitPrice</td>
                             <td>@item.UnitsInStock</td>
-
-                            @if (item.Category == null)
-                            {
-                                <td>Kategorisi  yok</td>
-                            }
-                            else
-                            {
-                                <td>@item.Category.CategoryName</td>
-                            }
+                            @if (item.Category == null) { <td>Kategorisi  yok</td> }
+                            else { <td>@item.Category.CategoryName</td> }
                             <td>@item.Status</td>
                             <td class="center hidden-phone">@Html.ActionLink("Güncelle", "UpdateProduct", new { id = item.ID }, new { @class = "btn btn-warning" })</td>
                             <td class="center hidden-phone">@Html.ActionLink("Sil", "DeleteProduct", new { id = item.ID }, new { @class = "btn btn-danger" })</td>

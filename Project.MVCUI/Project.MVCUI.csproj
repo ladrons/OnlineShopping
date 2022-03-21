@@ -129,8 +129,10 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
     <Compile Include="Areas\Admin\Controllers\CategoryController.cs" />
+    <Compile Include="Areas\Admin\Controllers\DashboardController.cs" />
     <Compile Include="Areas\Admin\Controllers\ProductController.cs" />
     <Compile Include="Areas\Admin\Data\VMClasses\CategoryVM.cs" />
+    <Compile Include="Areas\Admin\Data\VMClasses\DashboardVM.cs" />
     <Compile Include="Areas\Admin\Data\VMClasses\ProductVM.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\RegisterController.cs" />
@@ -162,6 +164,8 @@
     <Content Include="Areas\Admin\Views\Category\UpdateCategory.cshtml" />
     <Content Include="Areas\Admin\Views\Product\ProductList.cshtml" />
     <Content Include="Areas\Admin\Views\Product\AddProduct.cshtml" />
+    <Content Include="Areas\Admin\Views\Shared\_OverviewPartial.cshtml" />
+    <Content Include="Areas\Admin\Views\Dashboard\Information.cshtml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
@@ -1783,7 +1787,6 @@
     <Content Include="Tools\OuterTools\todo_list.html" />
     <Content Include="Tools\OuterTools\widget.html" />
     <Content Include="Tools\OuterTools\xchart.html" />
-    <Content Include="Tools\Pictures\399776570_ %281%29.jpg" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -2000,6 +2003,7 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Tools\OuterTools\assets\jquery-file-upload\server\php\files\thumbnail\" />
+    <Folder Include="Tools\Pictures\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
