@@ -1,0 +1,54 @@
+﻿@model ProductVM
+@{
+    ViewBag.Title = "UpdateProduct";
+}
+
+@using (Html.BeginForm("UpdateProduct", "Product", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.HiddenFor(x => x.Product.ID)
+    @Html.HiddenFor(x => x.Product.ImagePath)
+
+    <div class="panel">
+        <header class="panel-heading">
+            Ürün Güncelleme Sayfası
+        </header>
+
+        <div class="panel-body">
+            <div class="form-group">
+                <label class="col-sm-2">Ürün Adı</label>
+                <div class="col-sm-10">@Html.TextBoxFor(x => x.Product.ProductName)</div>
+            </div>
+
+            <br /> <br />
+
+            <div class="form-group">
+                <label class="col-sm-2"> Ürün Fiyatı</label>
+                <div class="col-sm-10"> @Html.TextBoxFor(x => x.Product.UnitPrice) </div>
+            </div>
+
+            <br /> <br />
+
+            <div class="form-group">
+                <label class="col-sm-2">Ürün Stok Miktarı</label>
+                <div class="col-sm-10"> @Html.TextBoxFor(x => x.Product.UnitsInStock)</div>
+            </div>
+
+            <br /> <br />
+
+            <div class="form-group">
+                <label class="col-sm-2">Kategoriler</label>
+                <div class="col-sm-10">@Html.DropDownListFor(x => x.Product.CategoryID, new SelectList(Model.Categories, "ID", "CategoryName"), "Lütfen Kategori Seçiniz")</div>
+            </div>
+
+            <br /> <br />
+
+            <div class="form-group">
+                <label class="col-sm-2"></label>
+                <div class="col-sm-10">
+                    <button class="btn btn-primary" style="width:100px;"> Güncelle</button>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+

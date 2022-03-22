@@ -41,7 +41,7 @@ namespace Project.MVCUI.Controllers
                 //if (!selected.Active) return ActiveControl(); // Kullanıcı admin olduğundan dolayı herhangi bir hesap onaylama süreci olmayacaktır.
 
                 Session["admin"] = selected;
-                return RedirectToAction("GetAllCategories", "Category", new { area = "Admin" });
+                return RedirectToAction("Information", "Dashboard", new { area = "Admin" });
             }
             else if (appUser.Password == decrypted && selected.Role == ENTITIES.Enums.UserRole.Member)
             {

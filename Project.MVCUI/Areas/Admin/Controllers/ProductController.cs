@@ -51,5 +51,36 @@ namespace Project.MVCUI.Areas.Admin.Controllers
         }
 
         //--\\//--\\//--\\//--\\//--\\//--\\//--\\//--\\//--\\
+
+        public ActionResult UpdateProduct(int id)
+        {
+            ProductVM pvm = new ProductVM
+            {
+                Categories = _cRep.GetActives(),
+                Product = _pRep.Find(id)
+            };
+            return View(pvm);
+        }
+        [HttpPost]
+        public ActionResult UpdateProduct(Product product)
+        {
+            _pRep.Update(product);
+            return RedirectToAction("ProductList");
+        }
+
+        //--\\//--\\//--\\//--\\//--\\//--\\//--\\//--\\//--\\
+
+        public ActionResult DeleteProduct(int id)
+        {
+            _pRep.Delete(_pRep.Find(id));
+            return RedirectToAction("ProductList");
+        }
+        public ActionResult DestroyProduct(int id)
+        {
+            _pRep.Destroy(_pRep.Find(id));
+            return RedirectToAction("ProductList");
+        }
+
+        //--\\//--\\//--\\//--\\//--\\//--\\//--\\//--\\//--\\
     }
 }

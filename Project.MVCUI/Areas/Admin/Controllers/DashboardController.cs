@@ -14,7 +14,7 @@ namespace Project.MVCUI.Areas.Admin.Controllers
         CategoryRepository _cRep;
         ProductRepository _pRep;
 
-        List<Category> _categories; List<Product> _products;
+        //List<Category> _categories; List<Product> _products;
 
         public DashboardController()
         {
@@ -30,7 +30,8 @@ namespace Project.MVCUI.Areas.Admin.Controllers
                 Categories = _cRep.GetActives(),
                 Products = _pRep.GetAll(),
 
-                Product = _pRep.GetLastData()
+                Product = _pRep.GetLastData(),
+                Category = _cRep.GetLastData()
             };
             return View(dvm);
         }
