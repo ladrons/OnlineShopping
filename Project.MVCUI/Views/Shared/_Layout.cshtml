@@ -288,7 +288,7 @@
                             @if (Session["admin"] != null) //Todo: Ben Yazdım (AdminAreas)
                             {
                 <span class="from">@((Session["admin"] as AppUser).UserName)</span> }
-            else
+                            else
             { <span class="username">Visitor</span>}
                             <b class="caret"></b>
                         </a>

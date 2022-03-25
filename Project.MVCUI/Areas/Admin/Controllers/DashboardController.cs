@@ -1,6 +1,7 @@
 ﻿using Project.BLL.DesignPatterns.GenericRepository.ConcRep;
 using Project.ENTITIES.Models;
 using Project.MVCUI.Areas.Admin.Data.VMClasses;
+using Project.MVCUI.Tools.Authentication;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,6 +10,8 @@ using System.Web.Mvc;
 
 namespace Project.MVCUI.Areas.Admin.Controllers
 {
+    [AdminAuth]
+
     public class DashboardController : Controller
     {
         CategoryRepository _cRep;

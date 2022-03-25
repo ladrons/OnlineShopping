@@ -48,7 +48,7 @@ namespace Project.MVCUI.Controllers
                 if (!selected.Active) return ActiveControl();
 
                 Session["member"] = selected;
-                return RedirectToAction("Index"); //ToDo: Yönlendirme sayfası güncellenecek
+                return RedirectToAction("ShoppingList","Shopping"); //ToDo: Yönlendirme sayfası güncellenecek
             }
             ViewBag.UserNotFound = "Kullanıcı Bulunamadı";
             return View();
