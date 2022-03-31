@@ -60,6 +60,8 @@ namespace Project.MVCUI.Areas.Admin.Controllers
         [HttpPost]
         public ActionResult AddCategory(Category category)
         {
+            if (!ModelState.IsValid) return View();
+
             _cRep.Add(category);
             return RedirectToAction("CategoryList");
         }

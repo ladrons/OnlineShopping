@@ -27,9 +27,10 @@
     <div class="container">
 
         <center>
-            <h3>
-                @TempData["ActiveControl"]
-            </h3>
+            <h3>@TempData["ActiveControl"]</h3>
+
+            <h3>@ViewBag.UserNotFound</h3>
+            <h3>@ViewBag.InActiveAccount</h3>
         </center>
 
         @using (Html.BeginForm("Login", "Home", FormMethod.Post, new { @class = "form-signin" }))
@@ -37,8 +38,15 @@
             <center><h2 class="form-signin-heading">GİRİŞ YAP</h2></center>
 
             <div class="login-wrap">
-                @Html.TextBoxFor(x => x.AppUser.UserName, new { @class = "form-control", placeholder = "Kullanıcı Adı" })
-                @Html.PasswordFor(x => x.AppUser.Password, new { @class = "form-control", placeholder = "Şifre" })
+
+                @Html.TextBoxFor(x => x.AppUserDTO.UserName, new { @class = "form-control", placeholder = "Kullanıcı Adı" })
+
+                <center><label class="validation">@Html.ValidationMessageFor(x => x.AppUserDTO.UserName)</label></center>
+
+                @Html.PasswordFor(x => x.AppUserDTO.Password, new { @class = "form-control", placeholder = "Şifre" })
+
+                <center><label class="validation">@Html.ValidationMessageFor(x => x.AppUserDTO.Password)</label></center>
+
             </div>
 
             <button class="btn-btn-lg btn btn-block btn btn-primary">Giriş Yap</button>
@@ -52,3 +60,10 @@
     </div>
 </body>
 </html>
+
+<style>
+    .validation {
+        color: red;
+        font-size: 12px;
+    }
+</style>

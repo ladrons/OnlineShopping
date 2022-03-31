@@ -1,5 +1,6 @@
 ﻿using Project.BLL.DesignPatterns.GenericRepository.ConcRep;
 using Project.COMMON.Tools;
+using Project.DTO.DTOs;
 using Project.ENTITIES.Models;
 using System;
 using System.Collections.Generic;
@@ -26,34 +27,47 @@ namespace Project.MVCUI.Controllers
             return View();
         }
         [HttpPost]
-        public ActionResult RegisterNow(AppUser appUser, AppUserProfile profile)
+        public ActionResult RegisterNow(AppUserDTO appUserDTO , AppUserProfile profile)
         {
-            appUser.ActivationCode = Guid.NewGuid();
-            appUser.Password = DantexCrypt.Crypt(appUser.Password);
-
-            if (_auRep.Any(x => x.UserName == appUser.UserName))
+            if(appUserDTO.UserName != null && appUserDTO.Password != null)
             {
-                ViewBag.SameUserName = "Kullanıcı Adı Kullanılıyor";
-                return View();
+                if (!ModelState.IsValid) return View();
+
+                if (_auRep.Any(x => x.UserName == appUserDTO.UserName))
+                {
+                    ViewBag.SameUserName = "Kullanıcı Adı Kullanılıyor";
+                    return View();
+                }
+                else if (_auRep.Any(x => x.EMail == appUserDTO.EMail))
+                {
+                    ViewBag.SameEMail = "E-Posta kullanılıyor";
+                    return View();
+                }
+
+                AppUser appUser = new AppUser
+                {
+                    UserName = appUserDTO.UserName,
+                    EMail = appUserDTO.EMail,
+                    Password = appUserDTO.Password
+                };
+
+                appUser.Password = DantexCrypt.Crypt(appUserDTO.Password);
+                appUser.ActivationCode = Guid.NewGuid();
+
+                string EMailToBeSent = $"Tebrikler {appUser.UserName}. Hesabınız başarılı bir şekilde oluşturuldu. Hesabınızı aktif etmek için https://localhost:44378/Register/Activation/" + appUser.ActivationCode + " linkine tıklayınız.";
+
+                MailService.Send(appUser.EMail, body: EMailToBeSent, subject: "Hesap Aktivasyonu");
+
+                _auRep.Add(appUser);
+
+                if (!string.IsNullOrEmpty(profile.FirstName.Trim()) || !string.IsNullOrEmpty(profile.LastName.Trim()))
+                {
+                    profile.ID = appUser.ID;
+                    _proRep.Add(profile);
+                }
+                return View("RegisterComplete");
             }
-            else if (_auRep.Any(x => x.EMail == appUser.EMail))
-            {
-                ViewBag.SameEMail = "E-Posta kullanılıyor";
-                return View();
-            }
-
-            string EMailToBeSent = $"Tebrikler {appUser.UserName}. Hesabınız başarılı bir şekilde oluşturuldu. Hesabınızı aktif etmek için https://localhost:44378/Register/Activation/" + appUser.ActivationCode + " linkine tıklayınız.";
-
-            MailService.Send(appUser.EMail, body: EMailToBeSent, subject: "Hesap Aktivasyonu");
-
-            _auRep.Add(appUser);
-
-            if (!string.IsNullOrEmpty(profile.FirstName.Trim()) || !string.IsNullOrEmpty(profile.LastName.Trim()))
-            {
-                profile.ID = appUser.ID;
-                _proRep.Add(profile);
-            }
-            return View("RegisterComplete");
+            return View();
         }
 
         //--\\//--\\//--\\//--\\//--\\//--\\//--\\//--\\//--\\

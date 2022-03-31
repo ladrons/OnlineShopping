@@ -1,6 +1,7 @@
 ﻿using Project.ENTITIES.Enums;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -12,9 +13,11 @@ namespace Project.ENTITIES.Models
         public string UserName { get; set; } // Kullanıcı Adı
         public string Password { get; set; } // Kullanıcının Şifre
         public string EMail { get; set; } // Kullanıcının E-Posta adresi
-        public Guid ActivationCode { get; set; } // Kullanıcının hesabını doğrulaması için bir guid yaratıyoruz.
+
+        //--\\//--\\//--\\//--\\//--\\//--\\//--\\//--\\//--\\
 
         public bool Active { get; set; } // Hesap doğrulaması yapılıp yapılmadığını kontrol ediyoruz.
+        public Guid ActivationCode { get; set; } // Kullanıcının hesabını doğrulaması için bir guid yaratıyoruz.
         public UserRole Role { get; set; }
 
         public AppUser()

@@ -19,7 +19,7 @@ namespace Project.DAL.StrategyPattern
             AppUser adminUser = new AppUser();
 
             adminUser.UserName = "brk123";
-            adminUser.Password = DantexCrypt.Crypt("123");
+            adminUser.Password = DantexCrypt.Crypt("123456");
             adminUser.EMail = "burak_cevik76@hotmail.com.tr";
             adminUser.Active = true;
             adminUser.Role = ENTITIES.Enums.UserRole.Admin;

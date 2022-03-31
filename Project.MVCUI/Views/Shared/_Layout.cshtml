@@ -10,6 +10,9 @@
 
     <title>FlatLab - Flat & Responsive Bootstrap Admin Template</title>
 
+    <script src="~/Scripts/jquery.validate.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.js"></script>
+
     <script src="~/Tools/OuterTools/js/jquery.js"></script>
     <script src="~/Tools/OuterTools/js/jquery-1.8.3.min.js"></script>
 
@@ -39,9 +42,7 @@
       <script src="js/html5shiv.js"></script>
       <script src="js/respond.min.js"></script>
     <![endif]-->
-
     <!-- #region Whatsapp Ekleme -->
-
     @*<script type="text/javascript">(function () {
             var options = {
                 whatsapp: "909999999999",
@@ -288,7 +289,7 @@
                             @if (Session["admin"] != null) //Todo: Ben Yazdım (AdminAreas)
                             {
                 <span class="from">@((Session["admin"] as AppUser).UserName)</span> }
-                            else
+            else
             { <span class="username">Visitor</span>}
                             <b class="caret"></b>
                         </a>
@@ -299,12 +300,12 @@
                             <li>
                                 <a href="@Url.Action("CartPage","Shopping")">
                                     <i class="icon-shopping-cart"></i>
-                                
+
                                     @if (Session["scart"] != null)
                                     {
-                                        <span>@((Session["scart"]as Cart).TotalPrice) $</span>
-                                    }
-                                    else {<span>0.00 $</span>}
+                        <span>@((Session["scart"]as Cart).TotalPrice) $</span> }
+                                    else
+                                    {<span>0.00 $</span>}
                                 </a>
                             </li>
                             <li><a href="login.html"><i class="icon-key"></i> Log Out</a></li>
@@ -522,7 +523,8 @@
     <script src="~/Tools/OuterTools/js/easy-pie-chart.js"></script>
     <script src="~/Tools/OuterTools/js/count.js"></script>
 
-    <script>//owl carousel
+    <script>
+        //owl carousel
 
         $(document).ready(function () {
             $("#owl-demo").owlCarousel({
