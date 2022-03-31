@@ -11,6 +11,7 @@ namespace Project.ENTITIES.Models
     {
         [Display(Name = "Kategori Adı")] [Required(ErrorMessage = "{0} girilmesi zorunludur")]
         [MaxLength(30, ErrorMessage = "{0} maksimum {1} karakter olmalıdır")]
+        [MinLength(4, ErrorMessage = "{0} minimum {1} karakter olabilir")]
         public string CategoryName { get; set; }
 
 

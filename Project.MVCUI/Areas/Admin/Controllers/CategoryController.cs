@@ -78,6 +78,8 @@ namespace Project.MVCUI.Areas.Admin.Controllers
         [HttpPost]
         public ActionResult UpdateCategory(Category category)
         {
+            if (!ModelState.IsValid) return View();
+
             _cRep.Update(category);
             return RedirectToAction("GetAllCategories");
         }
