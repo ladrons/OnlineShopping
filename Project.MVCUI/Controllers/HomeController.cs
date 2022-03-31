@@ -28,39 +28,39 @@ namespace Project.MVCUI.Controllers
         [HttpPost]
         public ActionResult Login(AppUserDTO appUserDTO)
         {
-                if(appUserDTO.UserName != null && appUserDTO.Password != null)
+            if (appUserDTO.UserName == null & appUserDTO.Password == null) return View();
+
+            if(appUserDTO.UserName.Length >= 5 && appUserDTO.Password.Length >= 6)
+            {
+                AppUser selected = _auRep.FirstOrDefault(x => x.UserName == appUserDTO.UserName);
+
+                if (selected == null)
                 {
-                    //if (!ModelState.IsValid) return View();
-
-                    AppUser selected = _auRep.FirstOrDefault(x => x.UserName == appUserDTO.UserName);
-
-                    if (selected == null)
-                    {
-                        ViewBag.UserNotFound = "Kullanıcı bulunamadı!";
-                        return View();
-                    }
-
-                    string decrypted = DantexCrypt.DeCrypt(selected.Password);
-
-                    if (appUserDTO.Password == decrypted && selected.Role == ENTITIES.Enums.UserRole.Admin)
-                    {
-                        Session["admin"] = selected;
-
-                        return RedirectToAction("Information", "Dashboard", new { area = "Admin" });
-                    }
-                    else if (appUserDTO.Password == decrypted && selected.Role == ENTITIES.Enums.UserRole.Member)
-                    {
-                        if (!selected.Active) return ActiveControl();
-
-                        Session["member"] = selected;
-
-                        return RedirectToAction("ShoppingList", "Shopping");
-                    }
-
-                    ViewBag.UserNotFound = "Kullanıcı Bulunamadı";
+                    ViewBag.UserNotFound = "Kullanıcı bulunamadı!";
                     return View();
                 }
+
+                string decrypted = DantexCrypt.DeCrypt(selected.Password);
+
+                if (appUserDTO.Password == decrypted && selected.Role == ENTITIES.Enums.UserRole.Admin)
+                {
+                    Session["admin"] = selected;
+
+                    return RedirectToAction("Information", "Dashboard", new { area = "Admin" });
+                }
+                else if (appUserDTO.Password == decrypted && selected.Role == ENTITIES.Enums.UserRole.Member)
+                {
+                    if (!selected.Active) return ActiveControl();
+
+                    Session["member"] = selected;
+
+                    return RedirectToAction("ShoppingList", "Shopping");
+                }
+
+                ViewBag.UserNotFound = "Kullanıcı Bulunamadı";
                 return View();
+            }
+            return View();
         }
         #endregion
 
