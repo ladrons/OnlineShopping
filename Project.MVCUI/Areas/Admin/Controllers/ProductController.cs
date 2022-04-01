@@ -11,7 +11,7 @@ using System.Web.Mvc;
 
 namespace Project.MVCUI.Areas.Admin.Controllers
 {
-    [AdminAuth]
+    //[AdminAuth]
     public class ProductController : Controller
     {
         ProductRepository _pRep; CategoryRepository _cRep;
@@ -45,10 +45,22 @@ namespace Project.MVCUI.Areas.Admin.Controllers
         [HttpPost]
         public ActionResult AddProduct(Product product, HttpPostedFileBase resim)
         {
-            product.ImagePath = ImageUploader.UploadImage("/Tools/Pictures/", resim);
-            _pRep.Add(product);
+            if(product.CategoryID != null)
+            {
+                if (!ModelState.IsValid) return View();
 
-            return RedirectToAction("ProductList");
+                product.ImagePath = ImageUploader.UploadImage("/Tools/Pictures/", resim);
+                _pRep.Add(product);
+
+                return RedirectToAction("ProductList");
+            }
+            ProductVM pvm = new ProductVM
+            {
+                Categories = _cRep.GetActives()
+            };
+            ViewBag.NotSelectedCategory = "Lütfen kategori seçiniz";
+
+            return View(pvm);
         }
 
         //--\\//--\\//--\\//--\\//--\\//--\\//--\\//--\\//--\\
@@ -57,16 +69,37 @@ namespace Project.MVCUI.Areas.Admin.Controllers
         {
             ProductVM pvm = new ProductVM
             {
+                Product = _pRep.Find(id),
                 Categories = _cRep.GetActives(),
-                Product = _pRep.Find(id)
             };
+
             return View(pvm);
         }
         [HttpPost]
         public ActionResult UpdateProduct(Product product)
         {
-            _pRep.Update(product);
-            return RedirectToAction("ProductList");
+            if(product.CategoryID != null)
+            {
+                if (ModelState.IsValid)
+                {
+                    _pRep.Update(product);
+                    return RedirectToAction("ProductList");
+                }
+                else
+                {
+                    ProductVM pvm1 = new ProductVM
+                    {
+                        Categories = _cRep.GetActives()
+                    };
+                    return View(pvm1);
+                }
+            }
+            ProductVM pvm2 = new ProductVM
+            {
+                Categories = _cRep.GetActives()
+            };
+            ViewBag.NotSelectedCategory = "Lütfen kategori seçin";
+            return View(pvm2);
         }
 
         //--\\//--\\//--\\//--\\//--\\//--\\//--\\//--\\//--\\

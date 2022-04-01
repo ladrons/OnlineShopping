@@ -10,34 +10,62 @@
 
     <div class="panel">
         <header class="panel-heading">
-            Ürün Güncelleme Sayfası
+            <center><h3 style="color: #39b5aa">Ürün Güncelleme Sayfası</h3></center>
         </header>
 
         <div class="panel-body">
             <div class="form-group">
                 <label class="col-sm-2">Ürün Adı</label>
-                <div class="col-sm-10">@Html.TextBoxFor(x => x.Product.ProductName)</div>
+
+                <div class="col-sm-10">
+
+                    @Html.TextBoxFor(x => x.Product.ProductName, new { @class = "form-control" })
+                    
+                    <label class="validation">@Html.ValidationMessageFor(x => x.Product.ProductName)</label>
+
+                </div>
             </div>
 
             <br /> <br />
 
             <div class="form-group">
                 <label class="col-sm-2"> Ürün Fiyatı</label>
-                <div class="col-sm-10"> @Html.TextBoxFor(x => x.Product.UnitPrice) </div>
+
+                <div class="col-sm-10">
+
+                    @Html.TextBoxFor(x => x.Product.UnitPrice, new { @class = "form-control" })
+                    
+                    <label class="validation">@Html.ValidationMessageFor(x => x.Product.UnitPrice)</label>
+
+                </div>
             </div>
 
             <br /> <br />
 
             <div class="form-group">
                 <label class="col-sm-2">Ürün Stok Miktarı</label>
-                <div class="col-sm-10"> @Html.TextBoxFor(x => x.Product.UnitsInStock)</div>
+
+                <div class="col-sm-10">
+
+                    @Html.TextBoxFor(x => x.Product.UnitsInStock, new { @class = "form-control" })
+                    
+                    <label class="validation">@Html.ValidationMessageFor(x => x.Product.UnitsInStock)</label>
+
+                </div>
             </div>
 
             <br /> <br />
 
             <div class="form-group">
                 <label class="col-sm-2">Kategoriler</label>
-                <div class="col-sm-10">@Html.DropDownListFor(x => x.Product.CategoryID, new SelectList(Model.Categories, "ID", "CategoryName"), "Lütfen Kategori Seçiniz")</div>
+
+                <div class="col-sm-10">
+
+                    @Html.DropDownListFor(x => x.Product.CategoryID, new SelectList(Model.Categories, "ID", "CategoryName"), "Kategori Seçiniz")
+                    
+                    <label class="validation">@ViewBag.NotSelectedCategory</label>
+
+                </div>
             </div>
 
             <br /> <br />
@@ -51,4 +79,11 @@
         </div>
     </div>
 }
+
+<style>
+    .validation {
+        color: red;
+        font-size: 12px;
+    }
+</style>
 

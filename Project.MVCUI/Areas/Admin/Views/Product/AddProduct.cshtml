@@ -10,7 +10,7 @@
 
         <section class="panel">
             <header class="panel-heading">
-                Ürün Ekleme Sayfası
+                <center><h3 style="color: #39b5aa">Ürün Ekleme Sayfası</h3></center>
             </header>
 
             <div class="panel-body">
@@ -18,6 +18,8 @@
                     <label class="col-sm-2"> Ürün İsim</label>
                     <div class="col-sm-10">
                         @Html.TextBoxFor(x => x.Product.ProductName, new { @class = "form-control" })
+
+                        <label class="validation">@Html.ValidationMessageFor(x => x.Product.ProductName)</label>
                     </div>
                 </div>
 
@@ -27,6 +29,8 @@
                     <label class="col-sm-2"> Ürün Fiyatı</label>
                     <div class="col-sm-10">
                         @Html.TextBoxFor(x => x.Product.UnitPrice, new { @class = "form-control" })
+
+                        <label class="validation">@Html.ValidationMessageFor(x => x.Product.UnitPrice)</label>
                     </div>
                 </div>
 
@@ -36,15 +40,19 @@
                     <label class="col-sm-2"> Ürün Stok</label>
                     <div class="col-sm-10">
                         @Html.TextBoxFor(x => x.Product.UnitsInStock, new { @class = "form-control" })
+
+                        <label class="validation">@Html.ValidationMessageFor(x => x.Product.UnitsInStock)</label>
                     </div>
                 </div>
 
-                <br /> <br />
+                <br /> <br /> <hr />
 
                 <div class="form-group">
                     <label class="col-sm-2"> Kategori</label>
                     <div class="col-sm-10">
                         @Html.DropDownListFor(x => x.Product.CategoryID, new SelectList(Model.Categories, "ID", "CategoryName"), "Lutfen seciniz")
+
+                        <label class="validation">@ViewBag.NotSelectedCategory</label>
                     </div>
                 </div>
 
@@ -70,4 +78,11 @@
     </div>
 </div>
 }
+
+<style>
+    .validation {
+        color: red;
+        font-size: 12px;
+    }
+</style>
 
