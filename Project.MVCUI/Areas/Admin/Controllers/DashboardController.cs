@@ -11,7 +11,6 @@ using System.Web.Mvc;
 namespace Project.MVCUI.Areas.Admin.Controllers
 {
     [AdminAuth]
-
     public class DashboardController : Controller
     {
         CategoryRepository _cRep;

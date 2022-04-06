@@ -3,9 +3,11 @@
     ViewBag.Title = "CartPage";
 }
 
-<div class="jumbotron">
-    Odemeniz gereken toplam tutar =>  @Model.Cart.TotalPrice $ ...Siparisi onaylamak icin lütfen @Html.ActionLink("tıklayınız", "SiparisiOnayla")
+<div class="moneyInfo">
+    <center>Sepetinizdeki ürünlerin toplam tutarı =>  @Model.Cart.TotalPrice$ Siparişi onaylamak için @Html.ActionLink("tıklayınız", "SiparisiOnayla")</center>
 </div>
+
+<hr />
 
 <div class="row product-list">
     @foreach (CartItem item in Model.Cart.ShoppingCart)
@@ -13,14 +15,14 @@
         <div class="col-md-4">
             <section class="panel">
                 <div class="pro-img-box">
-                @if (item.ImagePath == null || item.ImagePath == "3" || item.ImagePath.Contains("nightlife"))
-                {
-                    <img src="~/Pictures/69c2e9ece9eb149d2def96a5aa199e17.jpg" alt="Resim yok" width="100" height="300" title="@item.Name" />
-                }
-                else
-                {
-                    <img src="@item.ImagePath" alt="Resim yok" width="100" height="300" title="@item.Name" />
-                }
+                    @if (item.ImagePath == null || item.ImagePath == "3" || item.ImagePath.Contains("nightlife"))
+                    {
+                        <img src="~/Tools/Pictures/NonPicture.jpg" alt="Resim yok" width="100" height="300" title="@item.Name" />
+                    }
+                    else
+                    {
+                        <img src="@item.ImagePath" alt="Resim yok" width="100" height="300" title="@item.Name" />
+                    }
 
                     <a href="@Url.Action("DeleteFromCart",new { id=item.ID})" class="adtocart">
                         <i class="glyphicon glyphicon-remove"></i>
@@ -32,13 +34,21 @@
                                 @item.Name x @item.Amount
                             </a>
                         </h4>
-                    <p class="price">
-                        $@item.SubTotal
-                    </p>
+                        <p class="price">
+                            $@item.SubTotal
+                        </p>
                     </div>
                 </div>
             </section>
-        </div>  
+        </div>
     }
 </div>
 
+<style>
+    .moneyInfo {
+        color: darkred;
+        font-size: 18px;
+    }
+</style>
+
+@*color:#39b5aa;*@

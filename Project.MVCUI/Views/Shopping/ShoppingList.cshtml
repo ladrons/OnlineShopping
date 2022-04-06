@@ -26,7 +26,7 @@
                     @foreach (Category item in Model.Categories)
                     {
                         <li style="padding-top:30px"> @Html.ActionLink(item.CategoryName, "ShoppingList", new { categoryID = item.ID }, new { @class = "btn btn-primary" })   </li>
-}
+                    }
                 </ul>
             </div>
         </section>
@@ -35,59 +35,63 @@
     <div class="col-md-9">
         <section class="panel">
             <div class="panel-body">
-
-
-                <div class="pull-right">
+                <div class="pull-left">
                     <ul class="pagination pagination-sm pro-page-list">
                         @if (TempData["catID"] != null)
                         {
                             <li>@Html.PagedListPager(Model.PagedProducts, page => Url.Action("ShoppingList", new { page, CategoryID = TempData["catID"] }))</li>
- }
+                        }
                         else
                         {
                             <li>@Html.PagedListPager(Model.PagedProducts, page => Url.Action("ShoppingList", new { page }))</li>
-}
+                        }
                     </ul>
                 </div>
             </div>
         </section>
+    </div>
 
-        <div class="row product-list">
+    <div class="col-md-9">
+        <section class="panel">
+            <div class="panel-body">
+                <div class="row product-list">
 
-            @foreach (Product item in Model.PagedProducts)
-            {
-                <div class="col-md-4">
-                    <section class="panel">
-                        <div class="pro-img-box">
+                    @foreach (Product item in Model.PagedProducts)
+                    {
+                        <div class="col-md-4">
+                            <section class="panel">
+                                <div class="pro-img-box">
 
-                            @if (item.ImagePath == null || item.ImagePath == "3" || item.ImagePath.Contains("night"))
-                            {
-                                <img src="~/Tools/Pictures/NonPicture.jpg" alt="Resim yok" width="378" height="200" title="@item.ProductName" /> }
-                            else
-                            {
-                            <img src="@item.ImagePath" alt="Resim yok" width="378" height="200" title="@item.ProductName" />}
+                                    @if (item.ImagePath == null || item.ImagePath == "3" || item.ImagePath.Contains("night"))
+                                    {
+                                        <img src="~/Tools/Pictures/NonPicture.jpg" alt="Resim yok" width="378" height="200" title="@item.ProductName" /> }
+                                    else
+                                    {
+                                        <img src="@item.ImagePath" alt="Resim yok" width="378" height="200" title="@item.ProductName" />}
 
 
 
-                            <a href="@Url.Action("AddCart",new { id=item.ID})" class="adtocart">
-                                <i class="icon-shopping-cart"></i>
-                            </a>
+                                    <a href="@Url.Action("AddCart",new { id=item.ID})" class="adtocart">
+                                        <i class="icon-shopping-cart"></i>
+                                    </a>
+                                </div>
+
+
+                                <div class="panel-body text-center">
+                                    <h4>
+                                        <a href="#" class="pro-title" title="@item.ProductName">
+                                            @item.ProductName | @if (item.Category != null)
+                                            {<span>@item.Category.CategoryName</span>}
+                                        </a>
+                                    </h4>
+                                    <p class="price">$@item.UnitPrice</p>
+                                </div>
+                            </section>
                         </div>
-
-
-                        <div class="panel-body text-center">
-                            <h4>
-                                <a href="#" class="pro-title" title="@item.ProductName">
-                                    @item.ProductName | @if (item.Category != null)
-                                    {<span>@item.Category.CategoryName</span>}
-                                </a>
-                            </h4>
-                            <p class="price">$@item.UnitPrice</p>
-                        </div>
-                    </section>
-                </div>      
-                }
-        </div>
+                    }
+                </div>
+            </div>
+        </section>
     </div>
 </div>
 <!-- page end-->

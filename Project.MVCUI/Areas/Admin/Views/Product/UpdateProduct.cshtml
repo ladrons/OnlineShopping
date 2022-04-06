@@ -20,7 +20,7 @@
                 <div class="col-sm-10">
 
                     @Html.TextBoxFor(x => x.Product.ProductName, new { @class = "form-control" })
-                    
+
                     <label class="validation">@Html.ValidationMessageFor(x => x.Product.ProductName)</label>
 
                 </div>
@@ -34,7 +34,7 @@
                 <div class="col-sm-10">
 
                     @Html.TextBoxFor(x => x.Product.UnitPrice, new { @class = "form-control" })
-                    
+
                     <label class="validation">@Html.ValidationMessageFor(x => x.Product.UnitPrice)</label>
 
                 </div>
@@ -48,7 +48,7 @@
                 <div class="col-sm-10">
 
                     @Html.TextBoxFor(x => x.Product.UnitsInStock, new { @class = "form-control" })
-                    
+
                     <label class="validation">@Html.ValidationMessageFor(x => x.Product.UnitsInStock)</label>
 
                 </div>
@@ -61,9 +61,17 @@
 
                 <div class="col-sm-10">
 
-                    @Html.DropDownListFor(x => x.Product.CategoryID, new SelectList(Model.Categories, "ID", "CategoryName"), "Kategori Seçiniz")
-                    
-                    <label class="validation">@ViewBag.NotSelectedCategory</label>
+
+
+                    @if (Model.Categories == null)
+                    {
+                        <label class="validation">@ViewBag.NotSelectedCategory</label>
+                        @Html.DropDownListFor(x => x.Product.CategoryID, new SelectList(Model.Categories, "ID", "CategoryName"), "Kategori Seçiniz")
+                    }
+                    else
+                    {
+                        @Html.DropDownListFor(x => x.Product.CategoryID, new SelectList(Model.Categories, "ID", "CategoryName"), "Kategori Seçiniz")
+                    }
 
                 </div>
             </div>
